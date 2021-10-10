@@ -109,7 +109,8 @@ main() {
     main
 }
 
-check=$(grep -n 'alias frp' /etc/profile | grep -v '#alias' | wc -l)
+c=$(grep 'alias frp' /etc/profile | grep -v '#alias')
+check=$(echo $c | wc -l)
 if [[ "$check" == "0" ]]; then
     if [[ "$type" == s* ]]; then
         log "echo \"alias frp='$cur/frp.sh s'\" >>/etc/profile"
@@ -118,6 +119,12 @@ if [[ "$check" == "0" ]]; then
     fi
 
     echo "please run: source /etc/profile"
+else
+    if [[ "$type" == s* ]]; then
+        cur=$(echo $c | sed "s/alias frp='//" | sed "s/frp.sh s'//")
+    else
+        cur=$(echo $c | sed "s/alias frp='//" | sed "s/frp.sh c'//")
+    fi
 fi
 
 main
