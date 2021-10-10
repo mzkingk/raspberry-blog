@@ -55,6 +55,7 @@ main() {
 
     case $type in
     1)
+        down
         install
         ;;
     2)
