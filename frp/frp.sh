@@ -65,7 +65,7 @@ down() {
 
 log() {
     cmd=$1
-    echo "cmd is: $cmd"
+    echo -e "cmd is: \033[31m$cmd\033[0m"
     eval $cmd
 }
 
@@ -108,5 +108,16 @@ main() {
     esac
     main
 }
+
+check=$(grep -n 'alias frp' /etc/profile | grep -v '#alias' | wc -l)
+if [[ "$check" == "0" ]]; then
+    if [[ "$type" == s* ]]; then
+        log "echo \"alias frp='$cur/frp.sh s'\" >>/etc/profile"
+    else
+        log "echo \"alias frp='$cur/frp.sh c'\" >>/etc/profile"
+    fi
+
+    echo "please run: source /etc/profile"
+fi
 
 main
