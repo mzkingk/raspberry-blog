@@ -35,7 +35,7 @@ install() {
     if [ ! -n $token ]; then
         token="admin"
     fi
-    sed -i "/exampleIp/s/exampleIp/$token/g" /opt/frp/$fcmd.ini
+    sed -i "/admin/s/admin/$token/g" /opt/frp/$fcmd.ini
 
     log "systemctl enable $fcmd"
 
