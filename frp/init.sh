@@ -55,9 +55,9 @@ down() {
     cp -rf frp /tmp/
     rm -rf frp
 
-    wget https://github.com/fatedier/frp/releases/download/v${version}/${fname}.tar.gz
-    tar -zxvf $fname.tar.gz
-    mv $fname frp
+    log "wget https://github.com/fatedier/frp/releases/download/v${version}/${fname}.tar.gz"
+    log "tar -zxvf $fname.tar.gz"
+    log "mv $fname frp"
 }
 
 log() {
@@ -91,6 +91,7 @@ main() {
         log "systemctl status $fcmd | tail -n 20"
         ;;
     4)
+        log "ps aux | grep frp | grep -v grep"
         log "cat /opt/frp/$fcmd.ini"
         ;;
     *)
