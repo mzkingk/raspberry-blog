@@ -66,7 +66,7 @@ down() {
 log() {
     cmd=$1
     echo -e "cmd is: \033[31m${cmd}\033[0m"
-    $(${cmd})
+    eval ${cmd}
 }
 
 main() {
