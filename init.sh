@@ -72,3 +72,4 @@ main() {
 }
 
 init_alias
+main
