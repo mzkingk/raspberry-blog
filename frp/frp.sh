@@ -4,10 +4,10 @@ type=$1
 echo "type is: $type"
 
 fcmd="frpc"
-if [[ "$type" == server* ]]; then
+if [[ "$type" == s* ]]; then
     fcmd="frps"
 else
-    if [[ "$type" == client* ]]; then
+    if [[ "$type" == c* ]]; then
         fcmd="frpc"
     else
         echo "need cmd client|server"
@@ -20,7 +20,7 @@ install() {
     log "cp -rf $cur/$fcmd.service /lib/systemd/system/"
 
     echo "type is: $type"
-    if [[ "$type" == client* ]]; then
+    if [[ "$type" == c* ]]; then
         echo -n "请输入server端ip或域名:"
         read ip
         if [ ! -n $ip ]; then
@@ -46,7 +46,7 @@ down() {
     cd /opt
 
     fname=frp_${version}_linux_arm
-    if [[ "$type" == server* ]]; then
+    if [[ "$type" == s* ]]; then
         fname=frp_${version}_linux_amd64
     fi
 
