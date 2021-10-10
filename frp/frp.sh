@@ -88,10 +88,10 @@ main() {
         log "systemctl restart $fcmd"
         ;;
     3)
+        log "ps aux | grep frp | grep -v grep"
         log "systemctl status $fcmd | tail -n 20"
         ;;
     4)
-        log "ps aux | grep frp | grep -v grep"
         log "cat /opt/frp/$fcmd.ini"
         ;;
     *)
