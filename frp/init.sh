@@ -46,7 +46,7 @@ down() {
     cd /opt
 
     fname=frp_${version}_linux_arm
-    if [ "$type" = "server" ]; then
+    if [[ "$type" == server* ]]; then
         fname=frp_${version}_linux_amd64
     fi
 
@@ -77,9 +77,9 @@ main() {
     # 参数-n的作用是不换行，echo默认换行
     echo -n "Enter:"
     # 把键盘输入放入变量name
-    read type
+    read key
 
-    case $type in
+    case $key in
     1)
         down
         install
