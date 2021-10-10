@@ -16,16 +16,34 @@ install() {
     cp -rf $cur/$fcmd.ini /opt/frp/
     cp -rf $cur/$fcmd.service /lib/systemd/system/
 
-    systemctl enable $fcmd
-    systemctl start $fcmd
+    if [ "$type" = "client" ]; then
+        echo -n "请输入server端ip或域名:"
+        read ip
+        if [ ! -n $ip ]; then
+            install
+        else
+            sed -i "/exampleIp/s/exampleIp/$ip/g" /opt/frp/$fcmd.ini
+        fi
+    fi
+
+    echo -n "请自定义token,为空则设置为admin:"
+    read token
+    if [ ! -n $token ]; then
+        token="admin"
+    fi
+    sed -i "/exampleIp/s/exampleIp/$token/g" /opt/frp/$fcmd.ini
+
+    log "systemctl enable $fcmd"
+
+    log "systemctl start $fcmd"
 }
 
 down() {
     cd /opt
 
-    fname=frp_${version}_linux_amd64
+    fname=frp_${version}_linux_arm
     if [ "$type" = "server" ]; then
-        fname=frp_${version}_linux_arm
+        fname=frp_${version}_linux_amd64
     fi
 
     rm -rf $fname.tar.gz
@@ -36,6 +54,11 @@ down() {
     wget https://github.com/fatedier/frp/releases/download/v${version}/${fname}.tar.gz
     tar -zxvf $fname.tar.gz
     mv $fname frp
+}
+
+log() {
+    echo "cmd is: $1"
+    $($1)
 }
 
 main() {
@@ -57,13 +80,13 @@ main() {
         install
         ;;
     2)
-        systemctl restart $fcmd
+        log "systemctl restart $fcmd"
         ;;
     3)
-        systemctl status $fcmd | tail -n 20
+        log "systemctl status $fcmd | tail -n 20"
         ;;
     4)
-        cat /opt/frp/$fcmd.ini
+        log "cat /opt/frp/$fcmd.ini"
         ;;
     *)
         main
