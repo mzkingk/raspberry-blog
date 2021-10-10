@@ -56,8 +56,11 @@ down() {
     rm -rf frp
 
     log "wget https://github.com/fatedier/frp/releases/download/v${version}/${fname}.tar.gz"
+    sleep 1
     log "tar -zxvf $fname.tar.gz"
+    sleep 1
     log "mv $fname frp"
+    sleep 1
 }
 
 log() {
