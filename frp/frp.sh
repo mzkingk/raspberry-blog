@@ -64,6 +64,12 @@ down() {
     sleep 1
 }
 
+check_status() {
+    echo "alias: echo \"alias frp='$cur/frp.sh'\">>/etc/profile"
+    log "ps aux | grep frp | grep -v grep"
+    log "systemctl status $fcmd | tail -n 20"
+}
+
 log() {
     cmd=$1
     echo -e "cmd is: \033[31m${cmd}\033[0m"
@@ -86,14 +92,14 @@ main() {
     1)
         down
         install
+        check_status
         ;;
     2)
         log "systemctl restart $fcmd"
+        check_status
         ;;
     3)
-        echo "set alias: echo \"alias frp='$cur/frp.sh'\">>/etc/profile"
-        log "ps aux | grep frp | grep -v grep"
-        log "systemctl status $fcmd | tail -n 20"
+        check_status
         ;;
     4)
         log "cat /opt/frp/$fcmd.ini"
@@ -128,4 +134,3 @@ else
 fi
 
 main
-
