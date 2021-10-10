@@ -19,6 +19,7 @@ install() {
     log "cp -rf $cur/$fcmd.ini /opt/frp/"
     log "cp -rf $cur/$fcmd.service /lib/systemd/system/"
 
+    echo "type is: $type"
     if [[ "$type" == client* ]]; then
         echo -n "请输入server端ip或域名:"
         read ip
