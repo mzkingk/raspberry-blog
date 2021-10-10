@@ -23,20 +23,18 @@ install() {
 down() {
     cd /opt
 
-    rm -rf $(fname).tar.gz
-    rm -rf $(fname)
-    cp -rf frp /tmp/
-    rm -rf frp
-
     fname=frp_$(version)_linux_amd64
     if [ "$type" = "server" ]; then
         fname=frp_$(version)_linux_arm
     fi
 
+    rm -rf $(fname).tar.gz
+    rm -rf $(fname)
+    cp -rf frp /tmp/
+    rm -rf frp
+
     wget https://github.com/fatedier/frp/releases/download/v$(version)/$(fname).tar.gz
-
     tar -zxvf $(fname).tar.gz
-
     mv $(fname) frp
 }
 
