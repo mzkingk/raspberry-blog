@@ -1,6 +1,7 @@
 version=0.37.1
 cur=$(pwd)
 type=$1
+echo "type is: $type"
 
 fcmd="frpc"
 if [ "$type" = "server" ]; then
@@ -13,8 +14,8 @@ else
 fi
 
 install() {
-    cp -rf $cur/$fcmd.ini /opt/frp/
-    cp -rf $cur/$fcmd.service /lib/systemd/system/
+    log "cp -rf $cur/$fcmd.ini /opt/frp/"
+    log "cp -rf $cur/$fcmd.service /lib/systemd/system/"
 
     if [ "$type" = "client" ]; then
         echo -n "请输入server端ip或域名:"
