@@ -65,8 +65,8 @@ down() {
 
 log() {
     cmd=$1
-    echo -e "cmd is: \033[31m$cmd\033[0m"
-    eval $cmd
+    echo -e "cmd is: \033[31m${cmd}\033[0m"
+    $(${cmd})
 }
 
 main() {
@@ -78,9 +78,7 @@ main() {
     0、退出
 "
 
-    # 参数-n的作用是不换行，echo默认换行
     echo -n "Enter:"
-    # 把键盘输入放入变量name
     read key
 
     case $key in
