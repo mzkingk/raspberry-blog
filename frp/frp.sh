@@ -75,6 +75,7 @@ main() {
     2、重启
     3、状态
     4、当前配置
+    0、退出
 "
 
     # 参数-n的作用是不换行，echo默认换行
@@ -91,11 +92,15 @@ main() {
         log "systemctl restart $fcmd"
         ;;
     3)
+        echo "set alias: echo \"alias frp='$cur/frp.sh'\">>/etc/profile"
         log "ps aux | grep frp | grep -v grep"
         log "systemctl status $fcmd | tail -n 20"
         ;;
     4)
         log "cat /opt/frp/$fcmd.ini"
+        ;;
+    0)
+        exit
         ;;
     *)
         main
