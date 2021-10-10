@@ -1,0 +1,13 @@
+[Unit]
+Description=fraps service
+After=network.target network-online.target syslog.target
+Wants=network.target network-online.target
+
+[Service]
+Type=simple
+
+#启动服务的命令（此处写你的frps的实际安装目录）
+ExecStart=/opt/frp/frps -c /opt/frp/frps.ini
+
+[Install]
+WantedBy=multi-user.target
