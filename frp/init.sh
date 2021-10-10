@@ -59,11 +59,7 @@ down() {
 log() {
     cmd=$1
     echo "cmd is: $cmd"
-    if [ ! -n $cmd ]; then
-        echo "cmd 不存在"
-    else
-        $($cmd)
-    fi
+    eval $cmd
 }
 
 main() {
