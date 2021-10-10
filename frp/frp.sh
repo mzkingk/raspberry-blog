@@ -96,6 +96,7 @@ main() {
         ;;
     2)
         log "systemctl restart $fcmd"
+        sleep 2
         check_status
         ;;
     3)
