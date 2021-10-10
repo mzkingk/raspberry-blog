@@ -16,6 +16,7 @@ else
 fi
 
 install() {
+    echo $cur
     log "cp -rf $cur/$fcmd.ini /opt/frp/"
     log "cp -rf $cur/$fcmd.service /lib/systemd/system/"
 
@@ -109,7 +110,7 @@ main() {
 
 c=$(grep 'alias frp' /etc/profile | grep -v '#alias')
 check=$(echo $c | wc -l)
-if [[ "$check" == "0" ]]; then
+if [[ "$check" == "0" ]] || [ "$c" = "" ]; then
     if [[ "$type" == s* ]]; then
         log "echo \"alias frp='$cur/frp.sh s'\" >>/etc/profile"
     else
@@ -123,6 +124,8 @@ else
     else
         cur=$(echo $c | sed "s/alias frp='//" | sed "s/frp.sh c'//")
     fi
+    echo $cur
 fi
 
 main
+
