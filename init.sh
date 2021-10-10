@@ -2,14 +2,16 @@ cur=$(pwd)
 
 init_alias() {
     c=$(grep -n 'alias ll' /etc/profile | grep -v '#alias')
-    check=$(cat $c | wc -l)
+    check=$(echo $c | wc -l)
     if [[ "$check" == "0" ]]; then
+        sed -i "/alias ll=/d" /etc/profile
         echo "alias ll='ls -lh'" >>/etc/profile
         echo "please run: source /etc/profile"
     fi
 
     check=$(grep -n 'alias j=' /etc/profile | grep -v '#alias' | wc -l)
     if [[ "$check" == "0" ]]; then
+        sed -i "/alias j=/d" /etc/profile
         echo "alias j='${cur}/init.sh'" >>/etc/profile
     else
         cur=$(echo $c | sed "s/alias j='//" | sed "s/init.sh'//")
