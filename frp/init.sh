@@ -61,7 +61,7 @@ main() {
         systemctl restart $fcmd
         ;;
     3)
-        systemctl status $fcmd
+        systemctl status $fcmd | tail -n 20
         ;;
     4)
         cat /opt/frp/$fcmd.ini
