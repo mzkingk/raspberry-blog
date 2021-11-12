@@ -46,10 +46,73 @@ install() {
 down() {
     cd /opt
 
-    fname=frp_${version}_linux_arm
-    if [[ "$type" == s* ]]; then
+    fname=frp_${version}_linux_amd64
+    echo "支持的版本如下:
+1.frp_${version}_darwin_amd64.tar.gz
+2.frp_${version}_darwin_arm64.tar.gz
+3.frp_${version}_freebsd_386.tar.gz
+4.frp_${version}_freebsd_amd64.tar.gz
+5.frp_${version}_linux_386.tar.gz
+6.frp_${version}_linux_amd64.tar.gz
+7.frp_${version}_linux_arm.tar.gz
+8.frp_${version}_linux_arm64.tar.gz
+9.frp_${version}_linux_mips.tar.gz
+10.frp_${version}_linux_mips64.tar.gz
+11.frp_${version}_linux_mips64le.tar.gz
+12.frp_${version}_linux_mipsle.tar.gz
+"
+    echo -n "选择版本:"
+    read tmpV
+    case $tmpV in
+    1)
+        fname=frp_${version}_darwin_amd64.tar.gz
+        ;;
+
+    2)
+        fname=frp_${version}_darwin_arm64.tar.gz
+        ;;
+
+    3)
+        fname=frp_${version}_freebsd_386
+        ;;
+
+    4)
+        fname=frp_${version}_freebsd_amd64
+        ;;
+
+    5)
+        fname=frp_${version}_linux_386
+        ;;
+    6)
         fname=frp_${version}_linux_amd64
-    fi
+        ;;
+
+    7)
+        fname=frp_${version}_linux_arm
+        ;;
+
+    8)
+        fname=frp_${version}_linux_arm64
+        ;;
+
+    9)
+        fname=frp_${version}_linux_mips
+        ;;
+
+    10)
+        fname=frp_${version}_linux_mips64
+        ;;
+    11)
+        fname=frp_${version}_linux_mips64le
+        ;;
+
+    12)
+        fname=frp_${version}_linux_mipsle
+        ;;
+    *)
+        down
+        ;;
+    esac
 
     rm -rf $fname.tar.gz
     rm -rf $fname
